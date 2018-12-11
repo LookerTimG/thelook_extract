@@ -71,6 +71,7 @@ explore: users_active {
   persist_with: datagroup_fourhour
   sql_always_where: ${order_items.returned_date} IS NOT NULL ;;
   join: order_items {
+    view_label: "Users Active"
     type: left_outer
     relationship: one_to_many
     sql_on: ${users_active.id} = ${order_items.user_id} ;;
@@ -82,7 +83,21 @@ explore: users_active {
           order_items.created_month,
           order_items.created_quarter,
           order_items.created_year,
-          order_items.sale_total
+          order_items.sale_total,
+          order_items.sale_price,
+          order_items.status
     ]
+  }
+}
+
+##self join explore
+explore: event_l {
+  from: events
+  join: event_r {
+    from: events
+  type: inner
+  relationship: many_to_many
+  sql_on: ${event_l.session_id} = ${event_r.session_id}
+          AND ${event_l.sequence_number} < ${event_r.sequence_number} ;;
   }
 }
