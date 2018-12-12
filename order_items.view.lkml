@@ -135,17 +135,17 @@ view: order_items {
     value_format: "0.00"
   }
 
-#   measure: sale_net {
-#     type: number
-#     sql: ${sale_price} - ${inventory_item_id.cost} ;;
-#     value_format_name: usd
-#   }
-#
-#   measure: sale_net_margin {
-#     type: number
-#     sql: 100.0 - ( ${inventory_item.cost} / ${sale_price} ) ;;
-#     value_format_name: percent_2
-#   }
+  measure: sale_net {
+    type: number
+    sql: ${sale_price} - ${inventory_items.cost} ;;
+    value_format_name: usd
+  }
+
+  measure: sale_net_margin {
+    type: number
+    sql: 100.0 - ( ${inventory_items.cost} / ${sale_price} ) ;;
+    value_format_name: percent_2
+  }
 
   # ----- Sets of fields for drilling ------
   set: detail {

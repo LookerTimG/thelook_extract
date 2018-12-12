@@ -42,7 +42,9 @@ explore: orders_users {
           -orders_users.delivered_week,
           -orders_users.delivered_month,
           -orders_users.delivered_quarter,
-          -orders_users.delivered_year
+          -orders_users.delivered_year,
+          -orders_users.sale_net,
+          -orders_users.sale_net_margin
           ]
   always_filter: {
     filters: {
