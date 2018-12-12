@@ -1,4 +1,4 @@
-connection: "thelook_events"
+connection: "thelook_events_redshift"
 
 include: "*.view.lkml"                       # include all views in this project
 
@@ -104,7 +104,7 @@ explore: users_active {
   }
 }
 
-##self join explore
+###self join explore
 # explore: event_l {
 #   from: events
 #   join: event_r {
