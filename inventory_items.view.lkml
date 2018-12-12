@@ -92,4 +92,14 @@ view: inventory_items {
     value_format_name: usd
   }
 
+  measure: cost_men {
+    type: sum
+    sql: case when products.department = 'Men' then $ ${cost} ELSE 0 END;;
+  }
+
+  measure: cost_women {
+    type: sum
+    sql: case when products.department = 'Women' then $ ${cost} ELSE 0 END;;
+  }
+
 }
