@@ -2,6 +2,7 @@ view: users {
   sql_table_name: thelook_events.USERS ;;
 
   dimension: id {
+    label: "ID Users"
     primary_key: yes
     type: number
     sql: ${TABLE}.ID ;;

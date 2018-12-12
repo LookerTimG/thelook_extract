@@ -2,6 +2,7 @@ view: order_items {
   sql_table_name: thelook_events.ORDER_ITEMS ;;
 
   dimension: id {
+    label: "ID Order Items"
     primary_key: yes
     type: number
     sql: ${TABLE}.ID ;;
