@@ -53,7 +53,7 @@ explore: orders_users {
     }
   }
   join: users {
-    view_label: "Order Users"
+    view_label: "Orders Users"
     type: inner
     relationship: many_to_one
     sql_on: ${orders_users.user_id} = ${users.id} ;;
