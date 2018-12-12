@@ -96,55 +96,81 @@ view: order_items {
   }
 
   measure: count_order_items {
+    label: "Count of the Total Number of Order Items"
+    description: "This is the count of the number of lines from Order Items"
     type: count
     drill_fields: [detail*]
   }
 
   measure: sale_total {
+    label: "Sum of Sale Price"
+    description: "The sum of the Sale Price values"
     type: sum
     sql: ${sale_price} ;;
     value_format: "$#,##0.00"
+    drill_fields: [sale_price, inventory_items.product_name, inventory_items.category, inventory_items.department]
   }
 
   measure: sale_price_min {
+    label: "Lowest Price Sold At"
+    description: "This is the minimum Sale Price"
     type: min
     sql: ${sale_price} ;;
     value_format: "$#,##0.00"
+    drill_fields: [sale_price, inventory_items.product_name, inventory_items.category, inventory_items.department]
   }
 
   measure: sale_price_max {
+    label: "Highest Price Sold At"
+    description: "This is the maximun Sale Price"
     type: max
     sql: ${sale_price} ;;
     value_format: "$#,##0.00"
+    drill_fields: [sale_price, inventory_items.product_name, inventory_items.category, inventory_items.department]
   }
 
   measure: sale_price_avg {
+    label: "Average Price Sold At"
+    description: "This is the average Sale Price"
     type: average
     sql: ${sale_price} ;;
     value_format: "$#,##0.00"
+    drill_fields: [sale_price, inventory_items.product_name, inventory_items.category, inventory_items.department]
   }
 
   measure: count_orders {
+    label: "Count of Unique Orders"
+    description: "This is a count of the distinct order_id's"
     type: count_distinct
     sql: ${order_id} ;;
+    drill_fields: [order_id, users.first_name, users.last_name, users.state, users.traffic_source]
   }
 
   measure: items_per_order_avg {
+    label: "Average Items On Order"
+    description: "This is the count of order items / count of unique orders"
     type: number
     sql: ${count_order_items} / ${count_orders} ;;
     value_format: "0.00"
+    drill_fields: [sale_price, inventory_items.product_name, inventory_items.category, inventory_items.department]
   }
 
   measure: sale_net {
+    label: "Sale Price minus Item Cost giving Gross Profit"
+    description: "Item's Sale Price minus the Inventory Item Cost value"
     type: number
     sql: ${sale_price} - ${inventory_items.cost} ;;
     value_format_name: usd
+    drill_fields: [sale_price, inventory_items.product_name, inventory_items.category, inventory_items.department]
   }
 
   measure: sale_net_margin {
+    label: "Sale Profit Margin"
+    description: "The net profit expressed as a percentage of the total price"
     type: number
     sql: 100.0 - ( ${inventory_items.cost} / ${sale_price} ) ;;
     value_format_name: percent_2
+    drill_fields: [sale_price, inventory_items.product_name, inventory_items.category, inventory_items.department]
   }
 
 

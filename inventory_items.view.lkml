@@ -90,16 +90,19 @@ view: inventory_items {
     type: sum
     sql: ${cost} ;;
     value_format_name: usd
+    drill_fields: [product_brand, product_category, product_department, product_name, product_retail_price]
   }
 
   measure: cost_men {
     type: sum
     sql: case when products.department = 'Men' then $ ${cost} ELSE 0 END;;
+    drill_fields: [product_brand, product_category, product_department, product_name, product_retail_price]
   }
 
   measure: cost_women {
     type: sum
     sql: case when products.department = 'Women' then $ ${cost} ELSE 0 END;;
+    drill_fields: [product_brand, product_category, product_department, product_name, product_retail_price]
   }
 
 }

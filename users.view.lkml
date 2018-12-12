@@ -17,11 +17,13 @@ view: users {
     tiers: [13, 18, 21, 35, 50, 65, 80]
     style:interval
     sql: ${age} ;;
+    drill_fields: [country, state, city]
   }
 
   dimension: city {
     type: string
     sql: ${TABLE}.CITY ;;
+    drill_fields: [last_name, age_tier, order_items.count_orders]
   }
 
   dimension: country {
