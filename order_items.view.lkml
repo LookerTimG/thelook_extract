@@ -1,5 +1,5 @@
 view: order_items {
-  sql_table_name: thelook_events.ORDER_ITEMS ;;
+  sql_table_name: public.ORDER_ITEMS ;;
 
   dimension: id {
     label: "ID Order Items"
