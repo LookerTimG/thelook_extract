@@ -9,6 +9,7 @@ view: order_items {
   }
 
   dimension_group: created {
+    label: "Created Order"
     type: time
     timeframes: [
       raw,

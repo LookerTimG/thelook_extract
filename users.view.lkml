@@ -34,6 +34,7 @@ view: users {
   }
 
   dimension_group: created {
+    label: "Created User"
     type: time
     timeframes: [
       raw,
