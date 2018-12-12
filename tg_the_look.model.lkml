@@ -62,9 +62,16 @@ explore: orders_users {
 explore: distribution_centers {}
 explore: events {}
 explore: inventory_items {}
-explore: order_items {}
 explore: products {}
 explore: users {}
+
+explore: order_items {
+  join: inventory_items {
+    type: inner
+    relationship: many_to_one
+    sql_on: ${order_items.inventory_item_id} = ${inventory_items.id} ;;
+  }
+}
 
 explore: users_active {
   from: users
@@ -91,13 +98,13 @@ explore: users_active {
 }
 
 ##self join explore
-explore: event_l {
-  from: events
-  join: event_r {
-    from: events
-  type: inner
-  relationship: many_to_many
-  sql_on: ${event_l.session_id} = ${event_r.session_id}
-          AND ${event_l.sequence_number} < ${event_r.sequence_number} ;;
-  }
-}
+# explore: event_l {
+#   from: events
+#   join: event_r {
+#     from: events
+#   type: inner
+#   relationship: many_to_many
+#   sql_on: ${event_l.session_id} = ${event_r.session_id}
+#           AND ${event_l.sequence_number} < ${event_r.sequence_number} ;;
+#   }
+# }

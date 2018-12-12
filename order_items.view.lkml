@@ -65,6 +65,11 @@ view: order_items {
     sql: ${TABLE}.SALE_PRICE ;;
   }
 
+  dimension: is_luxury {
+    type: yesno
+    sql: CASE WHEN ${sale_price} <= 50.00 THEN 0 ELSE 1 ;;
+  }
+
   dimension_group: shipped {
     type: time
     timeframes: [
@@ -90,7 +95,7 @@ view: order_items {
     sql: ${TABLE}.USER_ID ;;
   }
 
-  measure: count {
+  measure: count_order_items {
     type: count
     drill_fields: [detail*]
   }
@@ -98,7 +103,49 @@ view: order_items {
   measure: sale_total {
     type: sum
     sql: ${sale_price} ;;
+    value_format: "$#,##0.00"
   }
+
+  measure: sale_price_min {
+    type: min
+    sql: ${sale_price} ;;
+    value_format: "$#,##0.00"
+  }
+
+  measure: sale_price_max {
+    type: max
+    sql: ${sale_price} ;;
+    value_format: "$#,##0.00"
+  }
+
+  measure: sale_price_avg {
+    type: average
+    sql: ${sale_price} ;;
+    value_format: "$#,##0.00"
+  }
+
+  measure: count_orders {
+    type: count_distinct
+    sql: ${order_id} ;;
+  }
+
+  measure: items_per_order_avg {
+    type: number
+    sql: ${count_order_items} / ${count_orders} ;;
+    value_format: "0.00"
+  }
+
+#   measure: sale_net {
+#     type: number
+#     sql: ${sale_price} - ${inventory_item_id.cost} ;;
+#     value_format_name: usd
+#   }
+#
+#   measure: sale_net_margin {
+#     type: number
+#     sql: 100.0 - ( ${inventory_item.cost} / ${sale_price} ) ;;
+#     value_format_name: percent_2
+#   }
 
   # ----- Sets of fields for drilling ------
   set: detail {

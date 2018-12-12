@@ -12,6 +12,13 @@ view: users {
     sql: ${TABLE}.AGE ;;
   }
 
+  dimension: age_tier {
+    type: tier
+    tiers: [13, 18, 21, 35, 50, 65, 80]
+    style:interval
+    sql: ${age} ;;
+  }
+
   dimension: city {
     type: string
     sql: ${TABLE}.CITY ;;
@@ -70,6 +77,12 @@ view: users {
   dimension: state {
     type: string
     sql: ${TABLE}.STATE ;;
+  }
+
+  dimension: is_california {
+    type: yesno
+    sql: CASE WHEN UPPER(${state}) = "CA" then 1
+          ELSE "0" ;;
   }
 
   dimension: traffic_source {
